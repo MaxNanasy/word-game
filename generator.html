@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Word Game Generator</title>
+  </head>
+  <body>
+    <script type="application/javascript">
+      function generate(phraseInput) {
+        var letters = [],
+            letterToCountMap = {},
+            output
+        phraseInput.value.toUpperCase().replace(/[^A-Z]/g, '').forEach(letter =>
+          if (!(letter in letterToCountMap)) {
+            letters.push(letter);
+            letterToCountMap[letter] = 0
+          }
+          letterToCountMap[letter] ++
+        )
+        output = letters.map(letter => letter + letterToCountMap[letter]).join(' ')
+        document.getElementById('output').value = output
+      }
+    </script>
+    <label for="phrase">Phrase</label>
+    <textarea name="phrase" oninput="generate(this)" />
+    <label for="output">Output</label>
+    <textarea id="output" name="output" />
+  </body>
+</html>
